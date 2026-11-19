@@ -1,0 +1,7 @@
+# Python 3.8.16; install torch 2.0.0 + cu117 and torchvision 0.15.1 first (see README.md).
+timm==1.0.16
+numpy==1.23.5
+scipy==1.10.1
+h5py==3.8.0
+Pillow==9.4.0
+PyYAML==6.0.3

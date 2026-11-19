@@ -1,0 +1,41 @@
+# SARR-Net with an SMT-T backbone on MCOD: the recipe of the paper runs.
+
+model:
+  token_dim: 96
+  band_stats: mcod_band_stats.json   # per-band p1/p99 of the training split, Eq. (1); relative to this file
+
+data:
+  root: data/MCOD                    # contains TrainDataset/{Mat,GT} and TestDataset/{Mat,GT}
+  train_split: TrainDataset
+  test_split: TestDataset
+  short_side: 512                    # shorter image side after resizing
+  max_size: 2048                     # cap on the longer side
+  size_divisor: 32                   # bottom/right zero padding to a multiple of 32
+
+train:
+  seed: 266409173                    # paper runs: 266409173, 1698045477, 1339089471
+  epochs: 20
+  batch_size: 8                      # global batch, split over the visible GPUs by DataParallel
+  num_workers: 12
+  lr_backbone: 5.0e-5
+  lr_other: 2.0e-4
+  weight_decay: 1.0e-4               # AdamW
+  grad_clip: 0.5                     # element-wise gradient clamp
+  lr_decay_rate: 0.1                 # lr x decay_rate ** (epoch // lr_decay_epoch), constant for 20 epochs
+  lr_decay_epoch: 100
+
+loss:                                # Eq. (19); constant weights
+  boundary_weight: 0.25
+  relation_conf_weight: 0.10
+  relation_dis_weight: 0.03
+  stage3_weight: 0.15
+  small_prior_weight: 0.02
+  routing_weight: 0.02
+  roi_weight: 0.05
+  mix_weight: 0.04
+  thin_weight: 0.03
+  hardness_weights: [0.3, 0.2, 0.15, 0.15, 0.1]   # error, boundary, scale disagreement, uncertainty, false negative
+  roi_margin_kernel: 17
+  mix_boundary_kernel: 5
+  gate_entropy_range: [1.05, 1.45]
+  token_entropy_range: [0.35, 0.62]

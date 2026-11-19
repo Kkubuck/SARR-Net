@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the IEEE Transactions on Multimedia paper."
+title: "SARR-Net: Sensor-Aware Relation Routing for Multispectral Camouflaged Object Detection"
+type: software
+repository-code: "https://github.com/Kkubuck/SARR-Net"
+authors:
+  - family-names: Lee
+    given-names: Jisang
+  - family-names: Park
+    given-names: Cheoneum
+  - family-names: Jang
+    given-names: Haneol
+version: 0.1.0
+license: Apache-2.0
+date-released: 2026-11-19
+preferred-citation:
+  type: article
+  title: "SARR-Net: Sensor-Aware Relation Routing for Multispectral Camouflaged Object Detection"
+  authors:
+    - family-names: Lee
+      given-names: Jisang
+    - family-names: Park
+      given-names: Cheoneum
+    - family-names: Jang
+      given-names: Haneol
+  journal: "IEEE Transactions on Multimedia"
+  year: 2026
